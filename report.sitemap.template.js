@@ -9,72 +9,77 @@ module.exports = (data) => {
         <title>Report</title>
         
         <style>
-            body {
-                background: #101525;
-            }
-        
-            #results {
-                display: flex;
-                flex-direction: column;
-                padding: 1em;
-                border: 1px solid orange;
-                color: white;
-                gap: 0.5em;
-            }
-        
-            #results item {
-                border: 1px solid gray;
-                padding: 0.5em 1em;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-        
-        
-            #results item:hover {
-                background: #2196f330;
-            }
-        
-            #results item name,
-            #results item score {
-                flex: 1;
-                display: flex;
-                justify-content: space-between;
-            }
-        
-            [type='good'] {
-                color: lime;
-            }
-        
-            [type='avg'] {
-                color: orange;
-            }
-        
-            [type='bad'] {
-                color: red;
-            }
-        
-            #results item score>* {
-                display: flex;
-                flex: 1;
-                justify-content: center;
-                border: 1px solid;
-            }
-        
-            #results item score>[type='bad'] {
-                background: #ff00001a;
-                border: none;
-            }
-        
-            #results item score>[type='good'] {
-                background: #33ff001a;
-                border: none;
-            }
-        
-            #results item score>[type='avg'] {
-                background: #ffc8001a;
-                border: none;
-            }
+        body {
+            background: #101525;
+        }
+    
+        #results {
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            border: 1px solid orange;
+            color: white;
+            gap: 0.25em;
+        }
+    
+        #results item {
+            border: 1px solid gray;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.25em .5em;
+        }
+    
+    
+        #results item:hover {
+            background: #2196f330;
+        }
+    
+        #results item name,
+        #results item score {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            gap: 1em;
+            align-items: center;
+            font-size: 14px;
+        }
+    
+        [type='good'] {
+            color: lime;
+        }
+    
+        [type='avg'] {
+            color: orange;
+        }
+    
+        [type='bad'] {
+            color: red;
+        }
+    
+        #results item score>* {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            border-left: 1px solid;
+            font-size: 14px;
+            text-align: center;
+        }
+    
+        #results item score>[type='bad'] {
+            background: #ff00001a;
+            border: none;
+        }
+    
+        #results item score>[type='good'] {
+            background: #33ff001a;
+            border: none;
+        }
+    
+        #results item score>[type='avg'] {
+            background: #ffc8001a;
+            border: none;
+        }
         </style>
     </head>
     <body>

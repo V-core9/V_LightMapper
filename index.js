@@ -76,18 +76,21 @@ lh_test = async (pageUrl) => {
 
     const runnerResult = await lighthouse(pageUrl, options);
 
-    results.push({
+    var shortData = {
         name: pageUrl,
         perf: runnerResult.lhr.categories[`performance`].score * 100,
         bp: runnerResult.lhr.categories[`best-practices`].score * 100,
         seo: runnerResult.lhr.categories[`seo`].score * 100,
         acc: runnerResult.lhr.categories[`accessibility`].score * 100,
         pwa: runnerResult.lhr.categories[`pwa`].score * 100
-    });
+    };
+    results.push(shortData);
+
     await saveResult(pageUrl, runnerResult);
 
     await chrome.kill().then((Result) => {
-        console.log("\n🍾 DONE. Received: " + pageUrl);
+        console.log("\n🍾 DONE[url]: " + pageUrl + "  [ "+doneItems+" / "+itemNumber+" ]");
+        console.log(shortData);
         chromeWorkingStatus--;
         doneItems++;
     });
