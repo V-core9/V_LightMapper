@@ -4,7 +4,8 @@
   "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "map": "bash -c \"node index.js\""
   },
   "repository": {
     "type": "git",

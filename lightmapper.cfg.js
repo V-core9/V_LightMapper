@@ -5,20 +5,28 @@
 //*  module.exports = {
 //*    protocol: "https",
 //*    host: "v-core9.com",
-//*    path: "sitemap_index.xml"
+//*    path: "sitemap_index.xml",
+//*    onlyCategories : ["performance"],  
 //*  };
 //!  - - - - - - - - - - - - - - - - - - - - - - <[ EOF ]>- - - - - - - - - 
-//. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+//. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 //? Options Info: 
-//   |> protocol  - "http" || "https"                                     <- Just a protocol to use when referring to 
-//   |> host      -    "localhost:8080" || "random-host"        <- Domain / Host .... adding port if local 
-//   |> path     -    "sitemap_index.xml"                              <- Relative location of the sitemap file 
-//. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-
-
+//[📌]|> protocol                      - "http" || "https"                                                                <- [REQUIRED] Just a protocol to use when referring to 
+//[📌]|> host                             -    "localhost:8080" || "random-host"                                <- [REQUIRED] Domain / Host .... adding port if local
+//[📌]|> path                            -    "sitemap_index.xml"                                                     <- [REQUIRED] Relative location of the sitemap file
+//[🔀]|> disableHeadlessMode  -    true || false || undefined                                                <- [OPTIONAL] Will just tell chrome to not go into headless mode
+//[🔀]|> onlyCategories            -   [ accessibility, best-practices, performance, pwa, seo ]   <- [OPTIONAL] Array of items
+//. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+// 📌   <=[ REQUIRED ]
+// 🔀   <=[ OPTIONAL ]
+//. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 module.exports = {
-  protocol: "https",
-  host: "v-core9.com",
-  path: "sitemap_index.xml"
-};
+    protocol: "https",
+    host: "v-core9.com",
+    path: "sitemap_index.xml",
+    save_to_file: true,
+    disableHeadlessMode: false,
+    //onlyCategories: ["performance"]
+  };
+  

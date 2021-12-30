@@ -7,11 +7,8 @@ const Sitemapper = require("sitemapper");
 const sitemap = new Sitemapper();
 const sitemapToScan = require("./config-sitemap");
 const reports_dirname = path.join(__dirname, `reports/${sitemapToScan.config.host}`);
-
 const mapViewTemplate = require('./report.sitemap.template');
-
 var results = [];
-
 var pagesForTest;
 var chromeWorkingStatus = 0;
 var maxParallelNumber = 1;
@@ -87,11 +84,6 @@ lh_test = async (pageUrl) => {
         acc: runnerResult.lhr.categories[`accessibility`].score * 100,
         pwa: runnerResult.lhr.categories[`pwa`].score * 100
     });
-
-    console.log(results);
-
-    //fs.writeFileSync(sitemapToScan.config.host+'.json', JSON.stringify(results, true, 2));
-
     await saveResult(pageUrl, runnerResult);
 
     await chrome.kill().then((Result) => {
