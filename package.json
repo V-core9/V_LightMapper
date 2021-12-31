@@ -1,25 +1,25 @@
 {
-  "name": "v_lightmapper",
-  "version": "1.0.0",
-  "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "map": "bash -c \"node index.js\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/V-core9/V_LightMapper.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/V-core9/V_LightMapper/issues"
-  },
-  "homepage": "https://github.com/V-core9/V_LightMapper#readme",
-  "dependencies": {
-    "lighthouse": "^9.2.0",
-    "sitemapper": "^3.2.2"
-  }
+    "name": "v_lightmapper",
+    "version": "0.0.01",
+    "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "map": "bash -c \"node index.js\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/V-core9/V_LightMapper.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/V-core9/V_LightMapper/issues"
+    },
+    "homepage": "https://github.com/V-core9/V_LightMapper#readme",
+    "dependencies": {
+        "lighthouse": "^9.2.0",
+        "sitemapper": "^3.2.2"
+    }
 }
