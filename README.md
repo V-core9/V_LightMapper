@@ -64,7 +64,7 @@ Now you just wait for it to finish and check the folder "results" for the genera
 ## [🚗] Results ? 
 Still quite basic, there is also results folder which it will use to store "per-page" html results. Will be connected soon to allow access by clicking in root results.
 
-![Demo Run Results](./demo.jpeg)
+![Demo Run Results](./assets/demo.jpeg)
 
 
 > For Additional Info/Help refer to >>>

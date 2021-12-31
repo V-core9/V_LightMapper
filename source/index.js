@@ -35,7 +35,7 @@ const v_lightmapper = async (config) => {
 
     stopLooper = async () => {
         console.log("\n🌌 Finished All tasks.");
-        fs.writeFileSync('mapViewTemplate-' + config.host + '.html', mapViewTemplate(results));
+        fs.writeFileSync(path.join(__dirname,'../reports/mapViewTemplate-' + config.host + '.html', mapViewTemplate(results));
         clearInterval(looper);
     };
 
