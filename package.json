@@ -1,6 +1,6 @@
 {
     "name": "v_lightmapper",
-    "version": "0.0.07",
+    "version": "0.0.08",
     "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
     "main": "index.js",
     "scripts": {
@@ -11,9 +11,16 @@
         "type": "git",
         "url": "git+https://github.com/V-core9/V_LightMapper.git"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": [
+        "lighthouse test",
+        "load time",
+        "speed test",
+        "sitemap",
+        "sitemap lighthouse test",
+        "website test"
+    ],
+    "author": "slavko.vuletic92@gmail.com",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/V-core9/V_LightMapper/issues"
     },

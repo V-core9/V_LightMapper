@@ -1,13 +1,13 @@
 
 const v_lightmapper = async (config) => {
-    
+
 
     // ? This is where the actual sitemap URL gets combined...cuz we also need the values separate for additional use cases.
     var $sitemap = null;
 
 
     // ? This is the function that returns the sitemap URL or sets it if not already.
-    sitemap_path=()=> {
+    sitemap_path = () => {
         if ($sitemap === null) {
             $sitemap = `${config.protocol}://${config.host}/${config.path}`;
         }
@@ -22,13 +22,13 @@ const v_lightmapper = async (config) => {
     const Sitemapper = require("sitemapper");
     const sitemap = new Sitemapper();
     const mapViewTemplate = require('./lightmap.view.list');
-    config.reports_dir = config.reportsDir+'/'+config.host+'/';
+    config.reports_dir = config.reportsDir + '/' + config.host + '/';
 
     var results = {
-        startTime : null,
-        endTime : null,
-        execTime : null,
-        pageRes :[]
+        startTime: null,
+        endTime: null,
+        execTime: null,
+        pageRes: []
     };
 
     var pagesForTest;
@@ -43,8 +43,9 @@ const v_lightmapper = async (config) => {
     stopLooper = async () => {
         results.endTime = Date.now();
         results.execTime = results.endTime - results.startTime;
-        console.log("\n🌌 Finished All tasks. Exec.Time : " + results.execTime/1000 + "s");
-        fs.writeFileSync(config.reportsDir + 'mapViewTemplate-' + config.host + '.html', mapViewTemplate(results));
+        console.log("\n🌌 Finished All tasks. Exec.Time : " + results.execTime / 1000 + "s");
+        fs.writeFileSync(config.reportsDir + '/' + config.host + '.html', mapViewTemplate(results));
+        fs.writeFileSync(config.reportsDir + '/' + config.host + '.json', JSON.stringify(results));
         clearInterval(looper);
     };
 
@@ -109,7 +110,7 @@ const v_lightmapper = async (config) => {
             acc: (runnerResult.lhr.categories[`accessibility`] !== undefined) ? runnerResult.lhr.categories[`accessibility`].score * 100 : 0,
             pwa: (runnerResult.lhr.categories[`pwa`] !== undefined) ? runnerResult.lhr.categories[`pwa`].score * 100 : 0
         };
-        
+
         results.pageRes.push(shortData);
 
         await saveResult(pageUrl, runnerResult);
@@ -129,7 +130,7 @@ const v_lightmapper = async (config) => {
         .fetch(sitemap_path())
         .then((sites) => {
             pagesForTest = sites.sites;
-            itemNumber = pagesForTest.length;
+            itemNumber = 3;
             console.log(sites);
             looper = setInterval(core, 500);
         });
