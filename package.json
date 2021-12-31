@@ -1,6 +1,6 @@
 {
     "name": "v_lightmapper",
-    "version": "0.0.03",
+    "version": "0.0.04",
     "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
     "main": "index.js",
     "scripts": {
@@ -20,6 +20,7 @@
     "homepage": "https://github.com/V-core9/V_LightMapper#readme",
     "dependencies": {
         "lighthouse": "^9.2.0",
-        "sitemapper": "^3.2.2"
+        "sitemapper": "^3.2.2",
+        "v_file_system": "^1.0.5"
     }
 }

@@ -1,3 +1,4 @@
 const vLM = require('.');
+const vFS = require('v_file_system');
 
-vLM('./lightmapper.cfg');
+vLM(vFS.readSy('./lightmapper.cfg'));

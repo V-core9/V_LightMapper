@@ -1,9 +1,6 @@
 
-const v_lightmapper = async (cfg_path) => {
+const v_lightmapper = async (config) => {
     
-    // ? Config gets set with data from [ <root> / sitemap-scanner.config.js ] file that is root
-    const config= require(cfg_path);
-
 
     // ? This is where the actual sitemap URL gets combined...cuz we also need the values separate for additional use cases.
     var $sitemap = null;
