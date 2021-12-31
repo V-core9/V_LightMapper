@@ -130,7 +130,7 @@ const v_lightmapper = async (config) => {
         .fetch(sitemap_path())
         .then((sites) => {
             pagesForTest = sites.sites;
-            itemNumber = 3;
+            itemNumber = pagesForTest.length;
             console.log(sites);
             looper = setInterval(core, 500);
         });

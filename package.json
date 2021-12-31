@@ -1,6 +1,6 @@
 {
     "name": "v_lightmapper",
-    "version": "0.0.08",
+    "version": "0.0.9",
     "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
     "main": "index.js",
     "scripts": {
