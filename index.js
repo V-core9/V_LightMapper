@@ -22,7 +22,7 @@ const v_lightmapper = async (config) => {
     const Sitemapper = require("sitemapper");
     const sitemap = new Sitemapper();
     const reports_dirname = path.join(__dirname, `reports/${config.host}`);
-    const mapViewTemplate = require('./report.sitemap.template');
+    const mapViewTemplate = require('./template');
     var results = [];
     var pagesForTest;
     var chromeWorkingStatus = 0;
@@ -73,7 +73,7 @@ const v_lightmapper = async (config) => {
         chromeWorkingStatus++;
         lastAppointed++;
 
-        var launchFlags = { chromeFlags: (config.disableHeadlessMode !== true) ? ["--headless"] : [], };
+        var launchFlags = { chromeFlags: (config.disableHeadlessMode !== true) ? ["--headless", "--max-wait-for-load 3000"] : [], };
         const chrome = await chromeLauncher.launch(launchFlags);
         const options = {
             logLevel: "error",
