@@ -1,5 +1,4 @@
-module.exports = (data) => {
-    return `
+
     <!DOCTYPE html>
     <html>
     <head>
@@ -137,11 +136,52 @@ module.exports = (data) => {
             </v_block>
         </footer>
         <script>
-        const results = ${JSON.stringify(data, true, 2)}
+        const results = [
+  {
+    "name": "https://v-core9.com/blog/big_opening",
+    "perf": 0,
+    "bp": 0,
+    "seo": 0,
+    "acc": 0,
+    "pwa": 0
+  },
+  {
+    "name": "https://v-core9.com/blog/big_opening.html",
+    "perf": 0,
+    "bp": 0,
+    "seo": 0,
+    "acc": 0,
+    "pwa": 0
+  },
+  {
+    "name": "https://v-core9.com/blog/big-opening",
+    "perf": 0,
+    "bp": 0,
+    "seo": 0,
+    "acc": 0,
+    "pwa": 0
+  },
+  {
+    "name": "https://v-core9.com/blog/big-opening.html",
+    "perf": 0,
+    "bp": 0,
+    "seo": 0,
+    "acc": 0,
+    "pwa": 0
+  },
+  {
+    "name": "https://v-core9.com/blog/sample_post",
+    "perf": 0,
+    "bp": 0,
+    "seo": 0,
+    "acc": 0,
+    "pwa": 0
+  }
+]
         
         console.log(results);
     
-        var domRes = \`<item>
+        var domRes = `<item>
                         <name>Page URL</name>
                         <score>
                             <perf>Performance</perf>
@@ -150,7 +190,7 @@ module.exports = (data) => {
                             <acc>Accessibility</acc>
                             <pwa>PWA</pwa>
                         </score>
-                    </item>\`;
+                    </item>`;
     
     
         const scores = {
@@ -165,16 +205,16 @@ module.exports = (data) => {
     
         results.forEach(item => {
             console.log(item);
-            domRes += \`<item>
-                        <name>\${item.name}</name>
+            domRes += `<item>
+                        <name>${item.name}</name>
                         <score>
-                            <perf type="\${score_to_word(item.perf)}">\${item.perf}</perf>
-                            <bp type="\${score_to_word(item.bp)}">\${item.bp}</bp>
-                            <seo type="\${score_to_word(item.seo)}">\${item.seo}</seo>
-                            <acc type="\${score_to_word(item.acc)}">\${item.acc}</acc>
-                            <pwa type="\${score_to_word(item.pwa)}">\${item.pwa}</pwa>
+                            <perf type="${score_to_word(item.perf)}">${item.perf}</perf>
+                            <bp type="${score_to_word(item.bp)}">${item.bp}</bp>
+                            <seo type="${score_to_word(item.seo)}">${item.seo}</seo>
+                            <acc type="${score_to_word(item.acc)}">${item.acc}</acc>
+                            <pwa type="${score_to_word(item.pwa)}">${item.pwa}</pwa>
                         </score>
-                    </item>\`;
+                    </item>`;
         })
     
         document.querySelector("#results").innerHTML = domRes;
@@ -182,5 +222,4 @@ module.exports = (data) => {
         </script>
     </body>
     
-    </html>`;
-};
+    </html>

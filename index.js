@@ -94,21 +94,21 @@ const v_lightmapper = async (config) => {
 
         var shortData = {
             name: pageUrl,
-            perf: runnerResult.lhr.categories[`performance`].score * 100,
-            bp: runnerResult.lhr.categories[`best-practices`].score * 100,
-            seo: runnerResult.lhr.categories[`seo`].score * 100,
-            acc: runnerResult.lhr.categories[`accessibility`].score * 100,
-            pwa: runnerResult.lhr.categories[`pwa`].score * 100
+            perf: (runnerResult.lhr.categories[`performance`] !== undefined) ? runnerResult.lhr.categories[`performance`].score * 100 : 0,
+            bp: (runnerResult.lhr.categories[`best-practices`] !== undefined) ? runnerResult.lhr.categories[`best-practices`].score * 100 : 0,
+            seo: (runnerResult.lhr.categories[`seo`] !== undefined) ? runnerResult.lhr.categories[`seo`].score * 100 : 0,
+            acc: (runnerResult.lhr.categories[`accessibility`] !== undefined) ? runnerResult.lhr.categories[`accessibility`].score * 100 : 0,
+            pwa: (runnerResult.lhr.categories[`pwa`] !== undefined) ? runnerResult.lhr.categories[`pwa`].score * 100 : 0
         };
         results.push(shortData);
 
         await saveResult(pageUrl, runnerResult);
 
         await chrome.kill().then((Result) => {
-            console.log("\n🍾 DONE[url]: " + pageUrl + "  [ " + doneItems + " / " + itemNumber + " ]");
-            console.log(shortData);
             chromeWorkingStatus--;
             doneItems++;
+            console.log("\n🍾 DONE[url]: " + pageUrl + "  [ " + doneItems + " / " + itemNumber + " ]");
+            console.log(shortData);
         });
     };
 
