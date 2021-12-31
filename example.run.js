@@ -8,7 +8,7 @@ const config = {
     reportsDir : path.join(__dirname, `reports/`),
     save_to_file: true,
     disableHeadlessMode: false,
-    onlyCategories : ["performance"]
+    //onlyCategories : ["performance"]
 };
 
 v_lightmapper(config);

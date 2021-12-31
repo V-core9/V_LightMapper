@@ -1,11 +1,11 @@
 {
     "name": "v_lightmapper",
-    "version": "0.0.06",
+    "version": "0.0.07",
     "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "map": "bash -c \"node run.js\""
+        "map": "bash -c \"node example.run.js\""
     },
     "repository": {
         "type": "git",
