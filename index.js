@@ -17,6 +17,7 @@ var lastAppointed = 0;
 var itemNumber = 0;
 var looper;
 
+
 stopLooper = async () => {
     console.log("\n🌌 Finished All tasks.");
     fs.writeFileSync('mapViewTemplate-' + sitemapToScan.config.host + '.html', mapViewTemplate(results));
@@ -89,18 +90,25 @@ lh_test = async (pageUrl) => {
     await saveResult(pageUrl, runnerResult);
 
     await chrome.kill().then((Result) => {
-        console.log("\n🍾 DONE[url]: " + pageUrl + "  [ "+doneItems+" / "+itemNumber+" ]");
+        console.log("\n🍾 DONE[url]: " + pageUrl + "  [ " + doneItems + " / " + itemNumber + " ]");
         console.log(shortData);
         chromeWorkingStatus--;
         doneItems++;
     });
 };
 
-sitemap
-    .fetch(sitemapToScan.sitemap())
-    .then((sites) => {
-        pagesForTest = sites.sites;
-        itemNumber = pagesForTest.length;
-        console.log(sites);
-        looper = setInterval(core, 500);
-    });
+
+const v_lightmapper = async () => {
+
+    sitemap
+        .fetch(sitemapToScan.sitemap())
+        .then((sites) => {
+            pagesForTest = sites.sites;
+            itemNumber = pagesForTest.length;
+            console.log(sites);
+            looper = setInterval(core, 500);
+        });
+
+};
+
+module.exports = v_lightmapper;
