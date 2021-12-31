@@ -88,6 +88,8 @@ module.exports = (data) => {
                 background: #1f2538;
                 display: flex;
                 padding: 1em;
+                align-items: center;
+                justify-content: space-between;
             }
 
             footer {
@@ -123,11 +125,27 @@ module.exports = (data) => {
             body #results>item:nth-child(1):hover {
                 background: transparent;
             }
+
+            header h2 {
+                font-size: 1em;
+                color: #898989;
+            }
+            
+            a {
+                color: #2196f3;
+            }
+            
+            header h2 span {
+                background: #2196f3;
+                padding: .25em 0.5em;
+                color: white;
+            }
         </style>
     </head>
     <body>
         <header>
             <h1>🕯 LightMap : </h1>
+            <h2>Execution Time <span>${data.execTime/1000}s</span></h2>
         </header>
         <div id="results">
         </div>
@@ -163,7 +181,7 @@ module.exports = (data) => {
             return (numb > scores.avg) ? (numb > scores.good) ? 'good' : 'avg' : 'bad';
         };
     
-        results.forEach(item => {
+        results.pageRes.forEach(item => {
             console.log(item);
             domRes += \`<item>
                         <name>\${item.name}</name>

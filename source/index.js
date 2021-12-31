@@ -21,9 +21,16 @@ const v_lightmapper = async (config) => {
     const chromeLauncher = require("chrome-launcher");
     const Sitemapper = require("sitemapper");
     const sitemap = new Sitemapper();
-    const reports_dirname = path.join(__dirname, `reports/${config.host}`);
     const mapViewTemplate = require('./lightmap.view.list');
-    var results = [];
+    config.reports_dir = config.reportsDir+'/'+config.host+'/';
+
+    var results = {
+        startTime : null,
+        endTime : null,
+        execTime : null,
+        pageRes :[]
+    };
+
     var pagesForTest;
     var chromeWorkingStatus = 0;
     var maxParallelNumber = 1;
@@ -34,8 +41,10 @@ const v_lightmapper = async (config) => {
 
 
     stopLooper = async () => {
-        console.log("\n🌌 Finished All tasks.");
-        fs.writeFileSync(path.join(__dirname,'../reports/mapViewTemplate-' + config.host + '.html', mapViewTemplate(results));
+        results.endTime = Date.now();
+        results.execTime = results.endTime - results.startTime;
+        console.log("\n🌌 Finished All tasks. Exec.Time : " + results.execTime/1000 + "s");
+        fs.writeFileSync(config.reportsDir + 'mapViewTemplate-' + config.host + '.html', mapViewTemplate(results));
         clearInterval(looper);
     };
 
@@ -59,11 +68,11 @@ const v_lightmapper = async (config) => {
         var pageName = await getPageName(pageUrl);
         if (config.save_to_file === true) {
             const reportHtml = results.report;
-            if (!fs.existsSync(reports_dirname)) {
-                fs.mkdirSync(reports_dirname);
+            if (!fs.existsSync(config.reports_dir)) {
+                fs.mkdirSync(config.reports_dir);
             }
             fs.writeFileSync(
-                `${reports_dirname}/${pageName}.html`,
+                `${config.reports_dir}/${pageName}.html`,
                 reportHtml
             );
         }
@@ -100,7 +109,8 @@ const v_lightmapper = async (config) => {
             acc: (runnerResult.lhr.categories[`accessibility`] !== undefined) ? runnerResult.lhr.categories[`accessibility`].score * 100 : 0,
             pwa: (runnerResult.lhr.categories[`pwa`] !== undefined) ? runnerResult.lhr.categories[`pwa`].score * 100 : 0
         };
-        results.push(shortData);
+        
+        results.pageRes.push(shortData);
 
         await saveResult(pageUrl, runnerResult);
 
@@ -113,6 +123,7 @@ const v_lightmapper = async (config) => {
     };
 
 
+    results.startTime = Date.now();
 
     sitemap
         .fetch(sitemap_path())
