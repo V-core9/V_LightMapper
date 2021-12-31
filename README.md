@@ -54,13 +54,18 @@ module.exports = {
 
 Well after your have installed all dependencies and configured **lightmapper.cfg.js** file with settings you want to user just run a command from ```package.json``` to run the tool.
 
-    npm run v_map
+    npm run map
 
 That is it basically 🎉.
 
 Now you just wait for it to finish and check the folder "results" for the generated HTML results.
 
 ---
+## [🚗] Results ? 
+Still quite basic, there is also results folder which it will use to store "per-page" html results. Will be connected soon to allow access by clicking in root results.
+
+![Demo Run Results](./demo.jpeg)
+
 
 > For Additional Info/Help refer to >>>
 >
