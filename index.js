@@ -1,21 +1,21 @@
 
-const v_lightmapper = async (path) => {
+const v_lightmapper = async (cfg_path) => {
     
     // ? Config gets set with data from [ <root> / sitemap-scanner.config.js ] file that is root
-    const config= require(path);
+    const config= require(cfg_path);
 
 
     // ? This is where the actual sitemap URL gets combined...cuz we also need the values separate for additional use cases.
-    const $sitemap = null;
+    var $sitemap = null;
 
 
     // ? This is the function that returns the sitemap URL or sets it if not already.
     sitemap_path=()=> {
-        if (this.$sitemap === null) {
-            this.$sitemap = `${this.config.protocol}://${this.config.host}/${this.config.path}`;
+        if ($sitemap === null) {
+            $sitemap = `${config.protocol}://${config.host}/${config.path}`;
         }
-        console.log(`🚩 SitemapURL : ${this.$sitemap}`);
-        return this.$sitemap;
+        console.log(`🚩 SitemapURL : ${$sitemap}`);
+        return $sitemap;
     };
 
     const path = require('path');
@@ -24,7 +24,6 @@ const v_lightmapper = async (path) => {
     const chromeLauncher = require("chrome-launcher");
     const Sitemapper = require("sitemapper");
     const sitemap = new Sitemapper();
-    const sitemapToScan = require("./config-sitemap");
     const reports_dirname = path.join(__dirname, `reports/${config.host}`);
     const mapViewTemplate = require('./report.sitemap.template');
     var results = [];
@@ -119,7 +118,7 @@ const v_lightmapper = async (path) => {
 
 
     sitemap
-        .fetch(sitemap())
+        .fetch(sitemap_path())
         .then((sites) => {
             pagesForTest = sites.sites;
             itemNumber = pagesForTest.length;

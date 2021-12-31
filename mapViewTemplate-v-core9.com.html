@@ -8,773 +8,84 @@
         <title>Report</title>
         
         <style>
-            body {
-                background: #101525;
-            }
-        
-            #results {
-                display: flex;
-                flex-direction: column;
-                padding: 1em;
-                border: 1px solid orange;
-                color: white;
-                gap: 0.25em;
-            }
-        
-            #results item {
-                border: 1px solid gray;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0.25em .5em;
-            }
-        
-        
-            #results item:hover {
-                background: #2196f330;
-            }
-        
-            #results item name,
-            #results item score {
-                flex: 1;
-                display: flex;
-                justify-content: space-between;
-                gap: 1em;
-                align-items: center;
-                font-size: 14px;
-            }
-        
-            [type='good'] {
-                color: lime;
-            }
-        
-            [type='avg'] {
-                color: orange;
-            }
-        
-            [type='bad'] {
-                color: red;
-            }
-        
-            #results item score>* {
-                display: flex;
-                flex: 1;
-                justify-content: center;
-                border-left: 1px solid;
-                font-size: 14px;
-                text-align: center;
-            }
-        
-            #results item score>[type='bad'] {
-                background: #ff00001a;
-                border: none;
-            }
-        
-            #results item score>[type='good'] {
-                background: #33ff001a;
-                border: none;
-            }
-        
-            #results item score>[type='avg'] {
-                background: #ffc8001a;
-                border: none;
-            }
+        body {
+            background: #101525;
+        }
+    
+        #results {
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            border: 1px solid orange;
+            color: white;
+            gap: 0.25em;
+        }
+    
+        #results item {
+            border: 1px solid gray;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.25em .5em;
+        }
+    
+    
+        #results item:hover {
+            background: #2196f330;
+        }
+    
+        #results item name,
+        #results item score {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            gap: 1em;
+            align-items: center;
+            font-size: 14px;
+        }
+    
+        [type='good'] {
+            color: lime;
+        }
+    
+        [type='avg'] {
+            color: orange;
+        }
+    
+        [type='bad'] {
+            color: red;
+        }
+    
+        #results item score>* {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            border-left: 1px solid;
+            font-size: 14px;
+            text-align: center;
+        }
+    
+        #results item score>[type='bad'] {
+            background: #ff00001a;
+            border: none;
+        }
+    
+        #results item score>[type='good'] {
+            background: #33ff001a;
+            border: none;
+        }
+    
+        #results item score>[type='avg'] {
+            background: #ffc8001a;
+            border: none;
+        }
         </style>
     </head>
     <body>
         <div id="results">
         </div>
         <script>
-        const results = [
-  {
-    "name": "https://v-core9.com/v9_admin",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/v9_admin",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/v9_admin.html",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/v-core9",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/v-core9.html",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/big_opening",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/big_opening.html",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/big-opening",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/big-opening.html",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/sample_post",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/sample_post.html",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/sample-post",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/blog/sample-post.html",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/about-us",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/about-us.html",
-    "perf": 95,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/about",
-    "perf": 95,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/about.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/info",
-    "perf": 95,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/info.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/authors",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/authors.html",
-    "perf": 95,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contributors",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contributors.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/blog",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/blog.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/posts",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/posts.html",
-    "perf": 95,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contact-us",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 83,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contact-us.html",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 83,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contact",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 83,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contact.html",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 83,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contact_us",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 83,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/contact_us.html",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 83,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/root",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/root.html",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/home",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/home.html",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/index",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/index.html",
-    "perf": 99,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/login",
-    "perf": 97,
-    "bp": 83,
-    "seo": 100,
-    "acc": 98,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/sign-in",
-    "perf": 98,
-    "bp": 83,
-    "seo": 100,
-    "acc": 98,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/verify-user",
-    "perf": 98,
-    "bp": 83,
-    "seo": 100,
-    "acc": 98,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/login.html",
-    "perf": 97,
-    "bp": 83,
-    "seo": 100,
-    "acc": 98,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/sign-in.html",
-    "perf": 98,
-    "bp": 83,
-    "seo": 100,
-    "acc": 98,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/verify-user.html",
-    "perf": 97,
-    "bp": 83,
-    "seo": 100,
-    "acc": 98,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/privacy_policy",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/privacy_policy.html",
-    "perf": 95,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/privacy-policy",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/privacy-policy.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/register",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/sign-up",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/sign-up.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/register.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/sitemap_index",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/sitemap_index.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/author-sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/author-sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/author_sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/author_sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/page-sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/page-sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/page_sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/page_sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/page_sitemap_index",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/page_sitemap_index.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/post-sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/post-sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/post_sitemap",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/post_sitemap.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/post_sitemap_index",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/post_sitemap_index.xml",
-    "perf": 0,
-    "bp": 0,
-    "seo": 0,
-    "acc": 0,
-    "pwa": 0
-  },
-  {
-    "name": "https://v-core9.com/statistics",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/statistics.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/our_stats",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/our_stats.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/system_status",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/system_status.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/system-status",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/system-status.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/terms_policy",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/terms_policy.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/terms-policy",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  },
-  {
-    "name": "https://v-core9.com/terms-policy.html",
-    "perf": 96,
-    "bp": 83,
-    "seo": 100,
-    "acc": 100,
-    "pwa": 90
-  }
-]
+        const results = []
         
         console.log(results);
     
