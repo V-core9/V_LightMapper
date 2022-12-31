@@ -1,13 +1,15 @@
-export interface V_Lightmapper_Config {
+export interface V_LightMapper_Interface {
   protocol: string,
   host: string,
-  path: string,
+  xmlPath: string,
   reportsDir: string,
   save_to_file?: boolean,
   headless?: boolean,
   onlyCategories: string[],
   reports_dir?: string,
-  customRootResultTemplate?: string
+  customRootResultTemplate?: string,
+  doneAfter?: number,
+  maxParallelNumber?: number,
 }
 
 
@@ -20,11 +22,11 @@ export interface InnerOption {
 
 
 export interface ResultsObject {
-  startTime: number|null,
-  endTime: number|null,
-  execTime: number|null,
+  startTime: number | null,
+  endTime: number | null,
+  execTime: number | null,
   pageRes: any[],
-  config?: V_Lightmapper_Config,
+  config?: V_LightMapper_Interface,
 }
 
 

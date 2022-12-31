@@ -1,6 +1,17 @@
-import { V_Lightmapper_Config, InnerOption, ResultsObject, ShortDataInterface, } from '..';
+import { V_LightMapper_Interface, InnerOption, ResultsObject, ShortDataInterface, } from '..';
 
-const v_lightmapper = async (config: V_Lightmapper_Config) => {
+const v_lightmapper = async (config: V_LightMapper_Interface) => {
+  const {
+    protocol,
+    host,
+    xmlPath,
+    customRootResultTemplate,
+    reportsDir,
+    save_to_file,
+    headless,
+    onlyCategories,
+    doneAfter
+  } = config;
 
   const { log, info, warn, error } = console;
 
@@ -10,7 +21,7 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
   // ? This is the function that returns the sitemap URL or sets it if not already.
   const sitemap_path = () => {
     if ($sitemap === null) {
-      $sitemap = `${config.protocol}://${config.host}/${config.path}`;
+      $sitemap = `${protocol}://${host}/${xmlPath}`;
     }
     info(`🚩 SitemapURL : ${$sitemap}`);
     return $sitemap;
@@ -22,8 +33,8 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
   const chromeLauncher = require("chrome-launcher");
   const Sitemapper = require("sitemapper");
   const sitemap = new Sitemapper();
-  const mapViewTemplate = require(!config.customRootResultTemplate ? './base.view' : config.customRootResultTemplate);
-  config.reports_dir = config.reportsDir + '/' + config.host + '/';
+  const mapViewTemplate = require(!customRootResultTemplate ? './base.view' : customRootResultTemplate);
+  config.reports_dir = reportsDir + '/' + host + '/';
 
   let results: ResultsObject = {
     config: config,
@@ -35,7 +46,7 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
 
   let pagesForTest: any;
   let chromeWorkingStatus = 0;
-  let maxParallelNumber = 1;
+  const maxParallelNumber = 1;
   let doneItems = 0;
   let lastAppointed = 0;
   let itemNumber = 0;
@@ -46,14 +57,15 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
     results.endTime = Date.now();
     results.execTime = results.endTime - (results.startTime || 0);
     warn("\n🌌 Finished All tasks. Exec.Time : " + results.execTime / 1000 + "s");
-    fs.writeFileSync(config.reportsDir + '/' + config.host + '.html', mapViewTemplate(results));
-    fs.writeFileSync(config.reportsDir + '/' + config.host + '.json', JSON.stringify(results));
+    fs.writeFileSync(reportsDir + '/' + host + '.html', mapViewTemplate(results));
+    fs.writeFileSync(reportsDir + '/' + host + '.json', JSON.stringify(results));
     clearInterval(looper);
   };
 
   const core = async () => {
+    if (doneAfter === doneItems) return await stopLooper();
     if (lastAppointed < itemNumber && chromeWorkingStatus < maxParallelNumber) {
-      await lh_test(pagesForTest[lastAppointed]);
+      await lighthouseTestURL(pagesForTest[lastAppointed]);
     } else if (doneItems == itemNumber) {
       await stopLooper();
     }
@@ -69,19 +81,18 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
 
   const saveResult = async (pageUrl: string, results: any) => {
     var pageName = await getPageName(pageUrl);
-    if (config.save_to_file === true) {
+    if (save_to_file === true) {
       const reportHtml = results.report;
-      if (!fs.existsSync(config.reports_dir)) {
-        fs.mkdirSync(config.reports_dir);
-      }
-      fs.writeFileSync(
-        `${config.reports_dir}/${pageName}.html`,
-        reportHtml
-      );
+
+      const { reports_dir } = config;
+
+      if (!fs.existsSync(reports_dir)) fs.mkdirSync(reports_dir);
+
+      fs.writeFileSync(`${reports_dir}/${pageName}.html`, reportHtml);
     }
   };
 
-  const lh_test = async (pageUrl: string) => {
+  const lighthouseTestURL = async (pageUrl: string) => {
     chromeWorkingStatus++;
     lastAppointed++;
 
@@ -89,7 +100,7 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
       chromeFlags: ["--max-wait-for-load 3000"],
     };
 
-    if (config.headless === true) launchFlags.chromeFlags = ["--headless", ...launchFlags.chromeFlags]
+    if (headless === true) launchFlags.chromeFlags = ["--headless", ...launchFlags.chromeFlags]
 
     const chrome = await chromeLauncher.launch(launchFlags);
 
@@ -99,12 +110,7 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
       port: chrome.port,
     };
 
-    if (!!config.onlyCategories) options.onlyCategories = [...config.onlyCategories];
-      //if (config.onlyCategories.indexOf("accessibility") > -1) options.onlyCategories.push("accessibility");
-      //if (config.onlyCategories.indexOf("best-practices") > -1) options.onlyCategories.push("best-practices");
-      //if (config.onlyCategories.indexOf("performance") > -1) options.onlyCategories.push("performance");
-      //if (config.onlyCategories.indexOf("pwa") > -1) options.onlyCategories.push("pwa");
-      //if (config.onlyCategories.indexOf("seo") > -1) options.onlyCategories.push("seo");
+    if (!!onlyCategories) options.onlyCategories = [...onlyCategories];
 
 
     const runnerResult = await lighthouse(pageUrl, options);

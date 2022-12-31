@@ -65,24 +65,29 @@ module.exports = (data) => {
                 display: flex;
                 flex: 1;
                 justify-content: center;
-                border-left: 1px solid;
                 font-size: 14px;
                 text-align: center;
+                border: 1px solid transparent;
+                padding: 0.35em;
+                font-weight: bold;
+                text-shadow: 0 0 12px black;
+            }
+
+            #results item>score>*:hover {
+              border: 1px solid;
+              cursor: pointer;
             }
 
             #results item score>[type='bad'] {
                 background: #ff00001a;
-                border: none;
             }
 
             #results item score>[type='good'] {
                 background: #33ff001a;
-                border: none;
             }
 
             #results item score>[type='avg'] {
                 background: #ffc8001a;
-                border: none;
             }
 
             header {
@@ -202,6 +207,9 @@ module.exports = (data) => {
 
 
         function PagesList({ config, pageRes, setSelected }) {
+
+          const selectHandle=(name)=> setSelected(\`\${config.host}/\${name.split('/')[name.split('/').length - 1]}.html\`);
+
           return (
             <div id="results">
               <item>
