@@ -1,4 +1,4 @@
-module.exports = (data) => {
+module.exports = (data:any) => {
     return `
     <!DOCTYPE html>
     <html>
@@ -130,11 +130,11 @@ module.exports = (data) => {
                 font-size: 1em;
                 color: #898989;
             }
-            
+
             a {
                 color: #2196f3;
             }
-            
+
             header h2 span {
                 background: #2196f3;
                 padding: .25em 0.5em;
@@ -155,10 +155,10 @@ module.exports = (data) => {
             </v_block>
         </footer>
         <script>
-        const results = ${JSON.stringify(data, true, 2)}
-        
+        const results = ${JSON.stringify(data, null, 2)}
+
         console.log(results);
-    
+
         var domRes = \`<item>
                         <name>Page URL</name>
                         <score>
@@ -169,18 +169,18 @@ module.exports = (data) => {
                             <pwa>PWA</pwa>
                         </score>
                     </item>\`;
-    
-    
+
+
         const scores = {
             good: 90,
             avg: 70,
             bad: 50
         };
-    
+
         score_to_word = (numb) => {
             return (numb > scores.avg) ? (numb > scores.good) ? 'good' : 'avg' : 'bad';
         };
-    
+
         results.pageRes.forEach(item => {
             console.log(item);
             domRes += \`<item>
@@ -194,11 +194,11 @@ module.exports = (data) => {
                         </score>
                     </item>\`;
         })
-    
+
         document.querySelector("#results").innerHTML = domRes;
-    
+
         </script>
     </body>
-    
+
     </html>`;
 };

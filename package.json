@@ -1,11 +1,12 @@
 {
     "name": "v_lightmapper",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "description": "Sitemapper + Lighthouse => LightMapper [get sitemap then scan all page].",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "map": "bash -c \"node example.run.js\""
+        "build": "tsc",
+        "example": "bash -c \"node example.run.js\""
     },
     "repository": {
         "type": "git",
@@ -29,5 +30,9 @@
         "lighthouse": "^9.2.0",
         "sitemapper": "^3.2.2",
         "v_file_system": "^1.0.5"
+    },
+    "devDependencies": {
+        "@tsconfig/node12": "^1.0.11",
+        "typescript": "^4.9.4"
     }
 }

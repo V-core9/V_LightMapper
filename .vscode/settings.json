@@ -14,5 +14,9 @@
         "LICENSE": true,
         ".gitignore": true
     },
-    "explorerExclude.backup": null
+    "explorerExclude.backup": null,
+    "cSpell.words": [
+        "lightmapper",
+        "Sitemapper"
+    ]
 }
