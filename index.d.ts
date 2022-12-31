@@ -4,7 +4,7 @@ export interface V_Lightmapper_Config {
   path: string,
   reportsDir: string,
   save_to_file?: boolean,
-  disableHeadlessMode?: boolean,
+  headless?: boolean,
   onlyCategories: string[],
   reports_dir?: string,
   customRootResultTemplate?: string
@@ -24,7 +24,8 @@ export interface ResultsObject {
   endTime: number|null,
   execTime: number|null,
   pageRes: any[],
-};
+  config?: V_Lightmapper_Config,
+}
 
 
 export interface ShortDataInterface {

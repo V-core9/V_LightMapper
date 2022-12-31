@@ -26,6 +26,7 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
   config.reports_dir = config.reportsDir + '/' + config.host + '/';
 
   let results: ResultsObject = {
+    config: config,
     startTime: null,
     endTime: null,
     execTime: null,
@@ -84,22 +85,27 @@ const v_lightmapper = async (config: V_Lightmapper_Config) => {
     chromeWorkingStatus++;
     lastAppointed++;
 
-    var launchFlags = { chromeFlags: (config.disableHeadlessMode !== true) ? ["--headless", "--max-wait-for-load 3000"] : [], };
+    let launchFlags = {
+      chromeFlags: ["--max-wait-for-load 3000"],
+    };
+
+    if (config.headless === true) launchFlags.chromeFlags = ["--headless", ...launchFlags.chromeFlags]
+
     const chrome = await chromeLauncher.launch(launchFlags);
+
     const options: InnerOption = {
       logLevel: "error",
       output: "html",
       port: chrome.port,
     };
 
-    if (typeof config.onlyCategories !== "undefined") {
-      options.onlyCategories = [];
-      if (config.onlyCategories.indexOf("accessibility") > -1) options.onlyCategories.push("accessibility");
-      if (config.onlyCategories.indexOf("best-practices") > -1) options.onlyCategories.push("best-practices");
-      if (config.onlyCategories.indexOf("performance") > -1) options.onlyCategories.push("performance");
-      if (config.onlyCategories.indexOf("pwa") > -1) options.onlyCategories.push("pwa");
-      if (config.onlyCategories.indexOf("seo") > -1) options.onlyCategories.push("seo");
-    }
+    if (!!config.onlyCategories) options.onlyCategories = [...config.onlyCategories];
+      //if (config.onlyCategories.indexOf("accessibility") > -1) options.onlyCategories.push("accessibility");
+      //if (config.onlyCategories.indexOf("best-practices") > -1) options.onlyCategories.push("best-practices");
+      //if (config.onlyCategories.indexOf("performance") > -1) options.onlyCategories.push("performance");
+      //if (config.onlyCategories.indexOf("pwa") > -1) options.onlyCategories.push("pwa");
+      //if (config.onlyCategories.indexOf("seo") > -1) options.onlyCategories.push("seo");
+
 
     const runnerResult = await lighthouse(pageUrl, options);
 

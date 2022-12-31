@@ -157,9 +157,9 @@ module.exports = (data:any) => {
         <script>
         const results = ${JSON.stringify(data, null, 2)}
 
-        console.log(results);
+        console.info("INPUT DATA/results", results);
 
-        var domRes = \`<item>
+        let domRes = \`<item>
                         <name>Page URL</name>
                         <score>
                             <perf>Performance</perf>

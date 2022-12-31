@@ -1,6 +1,6 @@
 "use strict";
 module.exports = (data) => {
-    return `
+  return `
     <!DOCTYPE html>
     <html>
     <head>
@@ -158,9 +158,9 @@ module.exports = (data) => {
         <script>
         const results = ${JSON.stringify(data, null, 2)}
 
-        console.log(results);
+        console.info("INPUT DATA/results", results);
 
-        var domRes = \`<item>
+        let domRes = \`<item>
                         <name>Page URL</name>
                         <score>
                             <perf>Performance</perf>
@@ -184,8 +184,11 @@ module.exports = (data) => {
 
         results.pageRes.forEach(item => {
             console.log(item);
+            const splitted = item.name.split('/');
             domRes += \`<item>
-                        <name>\${item.name}</name>
+                      <name>
+                        <a href="./\${results.config.host}/\${splitted[splitted.length - 1]}.html" target="_blank">\${item.name}</a>
+                      </name>
                         <score>
                             <perf type="\${score_to_word(item.perf)}">\${item.perf}</perf>
                             <bp type="\${score_to_word(item.bp)}">\${item.bp}</bp>
@@ -198,6 +201,43 @@ module.exports = (data) => {
 
         document.querySelector("#results").innerHTML = domRes;
 
+        </script>
+
+
+        <div id="domContainer"></div>
+
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+        <script type="text/babel">
+          function Example() {
+            // Declare a new state variable, which we'll call "count"
+            const [count, setCount] = React.useState(0);
+
+            return (
+              <div>
+                <p>You clicked {count} times</p>
+                <button onClick={() => setCount(count + 1)}>
+                  Click me
+                </button>
+              </div>
+            );
+          }
+
+          const Application = (props) => {
+            //const [modalContent, setModalContent] = React.useState({});
+
+            return <>
+              <Example/>
+              {(!!props) ? <p>{JSON.stringify(props)}</p> : <p>Empty Props</p>}
+            </>
+          }
+
+          const root = ReactDOM.createRoot(document.querySelector('#domContainer'));
+
+
+          window.addEventListener('load', () => root.render(Application({ results })));
         </script>
     </body>
 
