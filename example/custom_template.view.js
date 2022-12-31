@@ -141,104 +141,158 @@ module.exports = (data) => {
                 padding: .25em 0.5em;
                 color: white;
             }
+
+
+            @keyframes slide {
+              100% {
+                right: 0;
+                opacity: 1;
+              }
+            }
+
+            .modalFrame {
+              position: absolute;
+              top: 0;
+              right: -200px;
+              min-width: 400px;
+              width: 50%;
+              padding: 0;
+              background: #1f2538;
+              border: 1px solid black;
+              height: 100vh;
+              box-shadow: 0 0 20px grey;
+              animation: slide 0.5s forwards;
+              animation-delay: .25s;
+              opacity: 0;
+            }
+
+            .modalOverlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: #000000c0;
+            }
         </style>
     </head>
     <body>
-        <header>
-            <h1>🕯 LightMap : </h1>
-            <h2>Execution Time <span>${data.execTime / 1000}s</span></h2>
-        </header>
-        <div id="results">
-        </div>
-        <footer>
-            <v_block>
-                <v_text>Generated with <a href="https://npmjs.com/package/v_lightmapper">V_LightMapper</a>.</v_text>
-            </v_block>
-        </footer>
-        <script>
+
+      <div id="domContainer"></div>
+
+      <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+      <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+      <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+      <script type="text/babel">
         const results = ${JSON.stringify(data, null, 2)}
 
         console.info("INPUT DATA/results", results);
 
-        let domRes = \`<item>
-                        <name>Page URL</name>
-                        <score>
-                            <perf>Performance</perf>
-                            <bp>Best-Practices</bp>
-                            <seo>SEO</seo>
-                            <acc>Accessibility</acc>
-                            <pwa>PWA</pwa>
-                        </score>
-                    </item>\`;
-
-
         const scores = {
-            good: 90,
-            avg: 70,
-            bad: 50
+          good: 90,
+          avg: 70,
+          bad: 50
         };
 
-        score_to_word = (numb) => {
-            return (numb > scores.avg) ? (numb > scores.good) ? 'good' : 'avg' : 'bad';
+        const score_to_word = (numb) => {
+          return (numb > scores.avg) ? (numb > scores.good) ? 'good' : 'avg' : 'bad';
         };
 
-        results.pageRes.forEach(item => {
-            console.log(item);
-            const splitted = item.name.split('/');
-            domRes += \`<item>
-                      <name>
-                        <a href="./\${results.config.host}/\${splitted[splitted.length - 1]}.html" target="_blank">\${item.name}</a>
-                      </name>
-                        <score>
-                            <perf type="\${score_to_word(item.perf)}">\${item.perf}</perf>
-                            <bp type="\${score_to_word(item.bp)}">\${item.bp}</bp>
-                            <seo type="\${score_to_word(item.seo)}">\${item.seo}</seo>
-                            <acc type="\${score_to_word(item.acc)}">\${item.acc}</acc>
-                            <pwa type="\${score_to_word(item.pwa)}">\${item.pwa}</pwa>
-                        </score>
-                    </item>\`;
-        })
-
-        document.querySelector("#results").innerHTML = domRes;
-
-        </script>
 
 
-        <div id="domContainer"></div>
+        function PagesList({ config, pageRes, setSelected }) {
+          return (
+            <div id="results">
+              <item>
+                <name>Page URL</name>
+                <score>
+                  <perf>Performance</perf>
+                  <bp>Best-Practices</bp>
+                  <seo>SEO</seo>
+                  <acc>Accessibility</acc>
+                  <pwa>PWA</pwa>
+                </score>
+              </item>
+              {pageRes.map(item =>
+                <item onClick={()=> setSelected(\`\${config.host}/\${item.name.split('/')[item.name.split('/').length - 1]}.html\`)}>
+                  <name>
+                    <a href={\`\${config.host}/\${item.name.split('/')[item.name.split('/').length - 1]}.html\`} target="_blank">\${item.name}</a>
+                  </name>
+                  <score>
+                    <perf type={score_to_word(item.perf)}>{item.perf}</perf>
+                    <bp type={score_to_word(item.bp)}>{item.bp}</bp>
+                    <seo type={score_to_word(item.seo)}>{item.seo}</seo>
+                    <acc type={score_to_word(item.acc)}>{item.acc}</acc>
+                    <pwa type={score_to_word(item.pwa)}>{item.pwa}</pwa>
+                  </score>
+                </item>
+              )}
+            </div>
+          )
+        }
 
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
-        <script type="text/babel">
-          function Example() {
-            // Declare a new state variable, which we'll call "count"
-            const [count, setCount] = React.useState(0);
 
-            return (
-              <div>
-                <p>You clicked {count} times</p>
-                <button onClick={() => setCount(count + 1)}>
-                  Click me
-                </button>
-              </div>
-            );
-          }
+        // Print config component
+        function ConfigPrint({ config }) {
+          console.info(config);
+          return (
+            <div style={{ border: '1px solid black', padding: '1em' }} >
+              {Object.keys(config).map(item => <p style={{ fontSize: '1.15em' }}>{item}: <span style={{ color: 'orange', fontSize: '0.75em', fontWeight: 'bold' }}>{config[item]}</span></p>)}
+            </div>
+          )
+        }
 
-          const Application = (props) => {
-            //const [modalContent, setModalContent] = React.useState({});
 
-            return <>
-              <Example/>
-              {(!!props) ? <p>{JSON.stringify(props)}</p> : <p>Empty Props</p>}
+        function AppHeader ( {config} ) {
+          const [configShown, setConfigShown] = React.useState(false);
+
+          return (
+            <>
+              <header>
+                <h1>🕯 {config?.host || 'missing host'} : </h1>
+                <h2>Execution Time <span>131.352s</span></h2>
+                <button onClick={e=> setConfigShown(!configShown)} >Toggle Config Visibility</button>
+              </header>
+              {((!!config) && configShown) && ConfigPrint({ config })}
             </>
-          }
+          )
+        }
 
-          const root = ReactDOM.createRoot(document.querySelector('#domContainer'));
+        function AppFooter ( props ) {
+          return (
+            <footer>
+              <v_block>
+                <v_text>Generated with <a href="https://npmjs.com/package/v_lightmapper">V_LightMapper</a>.</v_text>
+              </v_block>
+            </footer>
+          )
+        }
 
+        // Application Root
+        function App ({ config, startTime, endTime, execTime, pageRes }) {
+          const [selected, setSelected] = React.useState(null);
 
-          window.addEventListener('load', () => root.render(Application({ results })));
-        </script>
+          return (<>
+            <AppHeader config={config} />
+
+            {(!!pageRes) ? PagesList({ ...results, setSelected }) : <p>⚠ MISSING [pageRes] PROP!</p>}
+
+            <AppFooter />
+
+            {selected && <>
+              <div className={['modalOverlay']} onClick={e => setSelected(null)} ></div>
+              <iframe className={['modalFrame']} src={selected}></iframe>
+            </>}
+          </>)
+        }
+
+        const root = ReactDOM.createRoot(document.querySelector('#domContainer'));
+
+        root.render(<App { ...results }/>);
+
+      </script>
     </body>
 
     </html>`;
